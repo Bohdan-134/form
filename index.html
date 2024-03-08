@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="./css/main.css">
+    <title>Form</title>
+</head>
+<body>
+    <div class="wrapper index__page">
+        <section class="section form__section">
+            <div class="container default">
+                <div class="section-content">
+                    <div class="form__wrapper">
+                        <form action="#" method="post" class="form">
+                            <div data-type="name" class="form-group">
+                                <label for="name">Имя:</label>
+                                <input type="text" id="name" name="name" class="input" required>
+                                <div class="error-message"></div>
+                            </div>
+                            <div data-type="tel" class="form-group">
+                                <label for="email">Телефон:</label>
+                                <input type="tel" id="tel" name="tel" class="input" required>
+                                <div class="error-message"></div>
+                            </div>
+                            <div data-type="text" class="form-group">
+                                <label for="message">Telegram:</label>
+                                <input type="text" id="text" name="text" class="input" required>
+                                <div class="error-message"></div>
+                            </div>
+                            <div class="form-group form-group__submit">
+                                <button type="submit" class="btn btn-submit">Отправить</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script src="./js/main.js"></script>
+</body>
+</html>
