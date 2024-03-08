@@ -1,57 +1,50 @@
 document.addEventListener("DOMContentLoaded", function () {
+
+    if (localStorage.getItem('formSubmitted')) {
+        disableForm();
+    }
+
     const form = document.querySelector('.form');
 
     form.addEventListener('submit', function (event) {
-        event.preventDefault(); // Prevent form submission
+        event.preventDefault();
 
-        // Clear previous error messages and error highlighting
         clearErrors();
 
-        // Validate each input field
         const nameInput = document.getElementById('name');
         const telInput = document.getElementById('tel');
         const textInput = document.getElementById('text');
 
-        // Validation for Name field
         if (nameInput.value.trim() === '') {
             displayError(nameInput, 'Поле "Имя" не должно быть пустым.');
         }
 
-        // Validation for Telephone field
         if (!/^\d{10}$/.test(telInput.value.replace(/\s/g, ''))) {
             displayError(telInput, 'Поле "Телефон" должно содержать 10 цифр без пробелов.');
         }
 
-        // Validation for Telegram field
         if (!/^\S+$/.test(textInput.value)) {
             displayError(textInput, 'Поле "Telegram" должно содержать одно слитное слово.');
         }
 
-        // If no errors, submit the form
         if (!document.querySelectorAll('.error').length) {
+            localStorage.setItem('formSubmitted', true);
             sendMessageToTelegram(nameInput.value, telInput.value, textInput.value);
-            // Here you can proceed with form submission or any other action
-            // For now, just clear the input fields
-            nameInput.value = '';
-            telInput.value = '';
-            textInput.value = '';
+            form.reset();
         }
     });
 
-    // Function to display error messages and highlight the input fields
     function displayError(input, message) {
         const parentDiv = input.closest('[data-type]');
         const errorMessage = parentDiv.querySelector('.error-message');
         errorMessage.textContent = message;
         parentDiv.classList.add('error');
 
-        // Remove the error class after 5 seconds
         setTimeout(function () {
             parentDiv.classList.remove('error');
         }, 5000);
     }
 
-    // Function to clear previous error messages and error highlighting
     function clearErrors() {
         const errorMessages = document.querySelectorAll('.error-message');
         errorMessages.forEach(message => message.textContent = '');
@@ -60,7 +53,6 @@ document.addEventListener("DOMContentLoaded", function () {
         errorFields.forEach(field => field.classList.remove('error'));
     }
 
-    // Function to send message to Telegram
     function sendMessageToTelegram(name, tel, text) {
         const TOKEN = "7164043612:AAFxTS0F8W2uHaCbkPDUbMjp8R7ZGKyYtJE";
         const CHAT_ID = "-4108684630";
